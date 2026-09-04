@@ -18,13 +18,18 @@ export function AdSenseUnit({
   }>(() => {
     try {
       const saved = localStorage.getItem('adsense_config');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.clientId && parsed.clientId !== 'ca-pub-DEMO987654321') {
+          return parsed;
+        }
+      }
     } catch {
       // ignore
     }
     return {
-      clientId: 'ca-pub-DEMO987654321',
-      isLive: false,
+      clientId: 'ca-pub-3199860809392813',
+      isLive: true,
     };
   });
 
@@ -34,7 +39,7 @@ export function AdSenseUnit({
   const saveConfig = (e: React.FormEvent) => {
     e.preventDefault();
     const updated = {
-      clientId: tempClientId.trim() || 'ca-pub-DEMO987654321',
+      clientId: tempClientId.trim() || 'ca-pub-3199860809392813',
       isLive: tempClientId.trim().startsWith('ca-pub-'),
     };
     setAdConfig(updated);
