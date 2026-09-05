@@ -272,7 +272,7 @@ export function generatePerformanceReportPDF(
   doc.setFontSize(6.5);
   doc.setTextColor(148, 163, 184);
   doc.text(
-    'Generated via Marks & GPA Calculator • 100% Privacy Preserved (Zero API Storage) • For Academic Reference',
+    'Generated via SmartMarks Calculator • 100% Privacy Preserved (Zero API Storage) • For Academic Reference',
     pageWidth / 2,
     pageHeight - 8,
     { align: 'center' }

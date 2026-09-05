@@ -17,7 +17,7 @@ export function Footer({ setActiveTab }: FooterProps) {
                 <GraduationCap className="h-5 w-5" />
               </div>
               <span className="text-base font-bold text-slate-900">
-                Student Marks &amp; GPA Calculator
+                SmartMarks Calculator
               </span>
             </div>
             <p className="text-xs text-slate-500 leading-relaxed max-w-md">

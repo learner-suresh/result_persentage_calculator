@@ -19,19 +19,19 @@ export default function App() {
   useEffect(() => {
     switch (activeTab) {
       case 'calculator':
-        document.title = 'Marks & GPA Calculator - 10th, 12th, College & PDF Reports';
+        document.title = 'SmartMarks Calculator - 10th, 12th, College & PDF Reports';
         break;
       case 'guides':
-        document.title = 'CBSE 10th, 12th & GPA Grading Formulas & Conversion Guides';
+        document.title = 'CBSE 10th, 12th & GPA Grading Formulas - SmartMarks Calculator';
         break;
       case 'about':
-        document.title = 'About Marks & GPA Calculator - Zero-API Student Privacy';
+        document.title = 'About SmartMarks Calculator - Zero-API Student Privacy';
         break;
       case 'privacy':
-        document.title = 'Privacy Policy & Student Data Protection - Marks & GPA Calculator';
+        document.title = 'Privacy Policy & Student Data Protection - SmartMarks Calculator';
         break;
       case 'contact':
-        document.title = 'Contact Support & Feedback - Student Marks & GPA Calculator';
+        document.title = 'Contact Support & Feedback - SmartMarks Calculator';
         break;
     }
   }, [activeTab]);

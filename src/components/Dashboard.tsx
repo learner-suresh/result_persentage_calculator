@@ -363,19 +363,63 @@ export function Dashboard() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 space-y-8">
-      {/* Top AdSense Leaderboard Placement */}
-      <AdSenseUnit slotId="9876543210" format="leaderboard" />
+      {/* Top Hero Section: Instant Percentage Calculator is the primary first element users see; Ad placement positioned alongside on the right side */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="lg:col-span-8 xl:col-span-8 order-1">
+          <FirstPlacePercentageCalculator
+            onScrollToDetailed={() => {
+              const el = document.getElementById('detailed-marksheet-section');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            onPopulateDetailed={handleTransferFromQuick}
+          />
+        </div>
 
-      {/* 1. FIRST PLACE: Modern Percentage Calculator (Scored [?] marks, Out of [?] marks, Calculate Percentage button) */}
-      <FirstPlacePercentageCalculator
-        onScrollToDetailed={() => {
-          const el = document.getElementById('detailed-marksheet-section');
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
-        onPopulateDetailed={handleTransferFromQuick}
-      />
+        {/* Right Side Ad Placement */}
+        <div className="lg:col-span-4 xl:col-span-4 order-2 space-y-4">
+          <AdSenseUnit slotId="9876543210" format="rectangle" className="my-0 shadow-xl" />
+
+          {/* Academic Formula & Division Reference Card */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xl shadow-slate-100 text-left space-y-3">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+              <span>Calculation &amp; Division Standards</span>
+            </div>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              <strong className="text-slate-700">Percentage Formula:</strong> (Scored Marks &divide; Out of Marks) &times; 100
+            </p>
+            <div className="grid grid-cols-3 gap-1.5 text-center text-[10px] font-bold">
+              <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-100">
+                <span>&ge; 60%</span>
+                <div className="text-[9px] font-normal text-emerald-600">1st Div</div>
+              </div>
+              <div className="p-1.5 rounded-lg bg-blue-50 text-blue-800 border border-blue-100">
+                <span>45% - 59%</span>
+                <div className="text-[9px] font-normal text-blue-600">2nd Div</div>
+              </div>
+              <div className="p-1.5 rounded-lg bg-amber-50 text-amber-800 border border-amber-100">
+                <span>33% - 44%</span>
+                <div className="text-[9px] font-normal text-amber-600">3rd Div</div>
+              </div>
+            </div>
+            <div className="pt-2 text-[11px] text-slate-400 flex items-center justify-between border-t border-slate-100">
+              <span>Zero-API Privacy</span>
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('detailed-marksheet-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-indigo-600 font-bold hover:underline cursor-pointer"
+              >
+                Subject Marksheet &darr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* 2. Detailed Subject-Wise Marksheet & Comprehensive Academic Analytics Section */}
       <section id="detailed-marksheet-section" className="space-y-6 pt-2">

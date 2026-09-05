@@ -49,7 +49,7 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
           </div>
           <div>
             <span className="block text-lg sm:text-xl font-bold tracking-tight text-slate-800 underline decoration-indigo-500 decoration-2 underline-offset-4 leading-tight">
-              SmartGrade Pro
+              SmartMarks Calculator
             </span>
             <span className="block text-[10px] sm:text-[11px] font-medium text-slate-500 tracking-tight">
               10th • 12th • College • Reports
