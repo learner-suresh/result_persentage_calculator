@@ -85,11 +85,11 @@ export function FirstPlacePercentageCalculator({
             </span>
             <span className="text-[11px] font-semibold text-slate-400">Quick Percentage Generator</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Marks to Percentage Calculator
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-            Enter your scored marks and total out of marks to generate your percentage instantly.
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
+            Marks Percentage Calculator
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Free online percentage calculator. Enter your scored marks and total out of marks to calculate your percentage, division, and performance summary instantly.
           </p>
         </div>
 

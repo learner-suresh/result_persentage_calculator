@@ -1,6 +1,6 @@
 {
   "name": "SmartMarks Calculator",
-  "description": "Fast, privacy-focused marks, percentage, and GPA calculator for 10th, 12th, and college students with instant PDF performance report exports.",
+  "description": "Free online marks percentage calculator for 10th, 12th board exams & college GPA. Calculate percentages, divisions, and download PDF performance reports.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

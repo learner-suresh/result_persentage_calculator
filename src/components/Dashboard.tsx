@@ -30,6 +30,7 @@ import { generatePerformanceReportPDF } from '../utils/pdfGenerator';
 import { AdSenseUnit } from './AdSenseUnit';
 import { FirstPlacePercentageCalculator } from './FirstPlacePercentageCalculator';
 import { PdfExportAdModal } from './PdfExportAdModal';
+import { PercentageCalculatorSeoContent } from './PercentageCalculatorSeoContent';
 
 export function Dashboard() {
   // Hidden file input for school / college / university logo
@@ -1300,6 +1301,9 @@ export function Dashboard() {
         </div>
       </div>
       </section>
+
+      {/* Complete Percentage Calculator SEO & Educational Guide */}
+      <PercentageCalculatorSeoContent />
 
       {/* PDF Export Ad Popup Modal */}
       <PdfExportAdModal
