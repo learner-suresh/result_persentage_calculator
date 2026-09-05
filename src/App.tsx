@@ -12,8 +12,53 @@ import { AboutPage } from './pages/AboutPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { ContactPage } from './pages/ContactPage';
 
+type TabType = 'calculator' | 'guides' | 'about' | 'privacy' | 'contact';
+
+function getTabFromPath(path: string): TabType {
+  const cleanPath = path.toLowerCase().replace(/\/+$/, '');
+  if (cleanPath === '/grading-guides' || cleanPath === '/guides') return 'guides';
+  if (cleanPath === '/about') return 'about';
+  if (cleanPath === '/privacy') return 'privacy';
+  if (cleanPath === '/contact') return 'contact';
+  return 'calculator';
+}
+
+function getPathFromTab(tab: TabType): string {
+  switch (tab) {
+    case 'guides': return '/grading-guides';
+    case 'about': return '/about';
+    case 'privacy': return '/privacy';
+    case 'contact': return '/contact';
+    default: return '/';
+  }
+}
+
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'calculator' | 'guides' | 'about' | 'privacy' | 'contact'>('calculator');
+  const [activeTab, setActiveTabState] = useState<TabType>(() => {
+    if (typeof window !== 'undefined') {
+      return getTabFromPath(window.location.pathname);
+    }
+    return 'calculator';
+  });
+
+  const setActiveTab = (tab: TabType) => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      const newPath = getPathFromTab(tab);
+      if (window.location.pathname !== newPath) {
+        window.history.pushState(null, '', newPath);
+      }
+    }
+  };
+
+  // Sync on browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setActiveTabState(getTabFromPath(window.location.pathname));
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Sync document title and meta description dynamically based on tab
   useEffect(() => {

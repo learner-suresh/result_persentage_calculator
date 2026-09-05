@@ -1,0 +1,9 @@
+# Direct static file access (prevents SPA rewrite of sitemap, robots, ads, verification)
+/sitemap.xml    /sitemap.xml    200
+/robots.txt     /robots.txt     200
+/ads.txt        /ads.txt        200
+/favicon.svg    /favicon.svg    200
+/google1d2c06ceba6c4d88.html /google1d2c06ceba6c4d88.html 200
+
+# Single Page Application fallback for deep links
+/*              /index.html     200
