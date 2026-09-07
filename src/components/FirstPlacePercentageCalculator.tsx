@@ -89,8 +89,8 @@ export function FirstPlacePercentageCalculator({
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
             Marks Percentage Calculator
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Free online percentage calculator. Enter your scored marks and total out of marks to calculate your percentage, division, and performance summary instantly.
+          <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+            Free online <strong>marks calculator</strong> and <strong>percentage calculator</strong>. Enter your scored marks and total out of marks to instantly calculate percentage, passing division, and exam performance.
           </p>
         </div>
 

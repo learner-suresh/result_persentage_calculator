@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { BookOpen, Calculator, HelpCircle, ChevronDown, Award, CheckCircle2, FileText, ArrowRight } from 'lucide-react';
+import {
+  BookOpen,
+  Calculator,
+  HelpCircle,
+  ChevronDown,
+  Award,
+  CheckCircle2,
+  FileText,
+  Percent,
+  Layers,
+  GraduationCap,
+  Sliders,
+} from 'lucide-react';
 
 interface FaqItem {
   question: string;
@@ -18,6 +30,11 @@ const FAQ_DATA: FaqItem[] = [
       'For 10th board exams (CBSE, ICSE, or State Boards), sum the marks obtained across all compulsory subjects and divide by the total maximum marks of those subjects. If your board considers the "Best of 5" rule, sum the top 5 highest-scoring academic subjects (500 marks total) and divide by 5.',
   },
   {
+    question: 'How do I calculate 12th standard marks percentage for Science, Commerce, and Arts?',
+    answer:
+      'To calculate 12th percentage, add your marks across all 5 core subjects (typically 100 marks each for a total of 500). Divide the total scored marks by 500 and multiply by 100. For engineering and medical college cutoffs, calculate the PCM (Physics, Chemistry, Maths) or PCB aggregate percentage by summing marks scored in those 3 subjects and dividing by 300.',
+  },
+  {
     question: 'What percentage is required for 1st Division, 2nd Division, and 3rd Division?',
     answer:
       'Under standard academic board guidelines: Distinction / Honors is awarded for 75% and above; First Division (1st Div) is awarded for 60.0% to 74.99%; Second Division (2nd Div) is awarded for 45.0% to 59.99%; Third Division (3rd Div) is awarded for 33.0% to 44.99%. Less than 33% is considered below the standard passing cutoff.',
@@ -25,7 +42,12 @@ const FAQ_DATA: FaqItem[] = [
   {
     question: 'How do I convert CGPA into percentage?',
     answer:
-      'For CBSE 10th and 12th standards, multiply your Cumulative Grade Point Average (CGPA) by 9.5. Formula: Percentage (%) = CGPA × 9.5. For example, a CGPA of 8.6 equals 8.6 × 9.5 = 81.7%. For international universities on a 4.0 scale, multiply your GPA by 25 (or follow your university specific conversion table).',
+      'For CBSE 10th and 12th standards, multiply your Cumulative Grade Point Average (CGPA) by 9.5. Formula: Percentage (%) = CGPA × 9.5. For example, a CGPA of 8.6 equals 8.6 × 9.5 = 81.7%. For universities using a 10-point scale or international 4.0 scale, multiply GPA by 25 or follow your university specific conversion table.',
+  },
+  {
+    question: 'Can I set a custom subject pass threshold percentage?',
+    answer:
+      'Yes. SmartMarks Calculator allows you to set any custom passing percentage (such as 33% for CBSE/ICSE, 35% for State boards, or 40%–50% for college degrees) directly using an input box or slider. The calculator dynamically identifies passed, failed, and compartment subjects based on your chosen threshold.',
   },
   {
     question: 'Can I download an official PDF marksheet report of my calculation?',
@@ -41,6 +63,33 @@ const FAQ_DATA: FaqItem[] = [
 
 export function PercentageCalculatorSeoContent() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [activeMatrixTab, setActiveMatrixTab] = useState<'500' | '600'>('500');
+
+  const matrix500 = [
+    { score: 475, pct: '95.0%', div: 'Distinction / Honors', grade: 'A+' },
+    { score: 450, pct: '90.0%', div: 'Distinction / Honors', grade: 'A+' },
+    { score: 425, pct: '85.0%', div: 'Distinction / Honors', grade: 'A' },
+    { score: 400, pct: '80.0%', div: 'Distinction / Honors', grade: 'A' },
+    { score: 375, pct: '75.0%', div: 'Distinction / Honors', grade: 'B+' },
+    { score: 350, pct: '70.0%', div: 'First Division (1st Div)', grade: 'B' },
+    { score: 300, pct: '60.0%', div: 'First Division (1st Div)', grade: 'B' },
+    { score: 250, pct: '50.0%', div: 'Second Division (2nd Div)', grade: 'C' },
+    { score: 225, pct: '45.0%', div: 'Second Division (2nd Div)', grade: 'C' },
+    { score: 165, pct: '33.0%', div: 'Third Division (3rd Div)', grade: 'D' },
+  ];
+
+  const matrix600 = [
+    { score: 570, pct: '95.0%', div: 'Distinction / Honors', grade: 'A+' },
+    { score: 540, pct: '90.0%', div: 'Distinction / Honors', grade: 'A+' },
+    { score: 510, pct: '85.0%', div: 'Distinction / Honors', grade: 'A' },
+    { score: 480, pct: '80.0%', div: 'Distinction / Honors', grade: 'A' },
+    { score: 450, pct: '75.0%', div: 'Distinction / Honors', grade: 'B+' },
+    { score: 420, pct: '70.0%', div: 'First Division (1st Div)', grade: 'B' },
+    { score: 360, pct: '60.0%', div: 'First Division (1st Div)', grade: 'B' },
+    { score: 300, pct: '50.0%', div: 'Second Division (2nd Div)', grade: 'C' },
+    { score: 270, pct: '45.0%', div: 'Second Division (2nd Div)', grade: 'C' },
+    { score: 210, pct: '35.0%', div: 'Third Division (3rd Div - State)', grade: 'D' },
+  ];
 
   return (
     <section
@@ -56,8 +105,8 @@ export function PercentageCalculatorSeoContent() {
         <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
           How to Calculate Marks to Percentage (Formula &amp; Examples)
         </h2>
-        <p className="text-sm text-slate-500 leading-relaxed">
-          Everything students, parents, and educators need to know about calculating percentage, grade points, passing divisions, and board exam cutoffs accurately.
+        <p className="text-sm text-slate-600 leading-relaxed">
+          Everything students, parents, and educators need to know about calculating percentage with our online <strong>percentage calculator</strong> and <strong>marks calculator</strong> for board exams, semester tests, and college GPA.
         </p>
       </div>
 
@@ -70,12 +119,12 @@ export function PercentageCalculatorSeoContent() {
             <h3 className="font-bold text-base text-slate-900">Standard Marks Percentage Formula</h3>
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            The percentage represents the fraction of total marks secured expressed as a fraction of 100.
+            The percentage represents the fraction of total marks secured expressed as a proportion out of 100.
           </p>
 
           <div className="bg-slate-900 text-white rounded-xl p-4 text-center space-y-2">
             <div className="text-[11px] uppercase tracking-widest text-indigo-300 font-bold">
-              Core Calculation Formula
+              Core Percentage Calculator Formula
             </div>
             <div className="text-sm sm:text-base font-mono font-bold text-amber-300 py-1">
               Percentage (%) = (Marks Obtained &divide; Total Maximum Marks) &times; 100
@@ -88,11 +137,11 @@ export function PercentageCalculatorSeoContent() {
           <ul className="space-y-2 text-xs text-slate-600">
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <span><strong>Marks Obtained:</strong> Total raw score earned across all exams/papers.</span>
+              <span><strong>Marks Scored (Obtained):</strong> Total raw score earned across all exams/papers.</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <span><strong>Total Maximum Marks:</strong> Total possible benchmark marks (e.g. 500 for 5 subjects of 100 each).</span>
+              <span><strong>Total Maximum Marks:</strong> Benchmark total possible marks (e.g., 500 for 5 subjects of 100 each).</span>
             </li>
           </ul>
         </div>
@@ -128,8 +177,110 @@ export function PercentageCalculatorSeoContent() {
 
           <div className="pt-1 text-[11px] text-slate-500 flex items-center gap-1.5">
             <Award className="w-4 h-4 text-amber-500 shrink-0" />
-            <span>You can calculate this in 1 second using our instant calculator above!</span>
+            <span>You can calculate this in 1 second using our instant marks calculator at the top of this page!</span>
           </div>
+        </div>
+      </div>
+
+      {/* Popular Search Reference Matrix: Out of 500 and Out of 600 */}
+      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xl shadow-slate-100 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider">
+              <Percent className="w-4 h-4" />
+              <span>Quick Lookup Tables</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight mt-1">
+              Marks to Percentage Quick Reference Matrix
+            </h3>
+            <p className="text-xs text-slate-500">
+              Common scores for 5-subject (500 marks) and 6-subject (600 marks) board exams.
+            </p>
+          </div>
+
+          {/* Switcher */}
+          <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 self-start sm:self-auto text-xs font-bold">
+            <button
+              type="button"
+              onClick={() => setActiveMatrixTab('500')}
+              className={`px-3.5 py-1.5 rounded-lg transition cursor-pointer ${
+                activeMatrixTab === '500'
+                  ? 'bg-white text-indigo-700 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Out of 500 (5 Subjects)
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveMatrixTab('600')}
+              className={`px-3.5 py-1.5 rounded-lg transition cursor-pointer ${
+                activeMatrixTab === '600'
+                  ? 'bg-white text-indigo-700 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-800'
+              }`}
+            >
+              Out of 600 (6 Subjects)
+            </button>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="bg-slate-100 text-slate-700 border-b border-slate-200">
+                <th className="py-2.5 px-4 font-bold">Marks Scored</th>
+                <th className="py-2.5 px-4 font-bold">Total Marks</th>
+                <th className="py-2.5 px-4 font-bold">Calculated Percentage</th>
+                <th className="py-2.5 px-4 font-bold">Division Awarded</th>
+                <th className="py-2.5 px-4 font-bold">Letter Grade</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 font-medium">
+              {(activeMatrixTab === '500' ? matrix500 : matrix600).map((row, idx) => (
+                <tr key={idx} className="hover:bg-slate-50/80 transition">
+                  <td className="py-2.5 px-4 font-mono font-bold text-slate-900">{row.score}</td>
+                  <td className="py-2.5 px-4 text-slate-500">{activeMatrixTab}</td>
+                  <td className="py-2.5 px-4 font-mono font-bold text-indigo-700">{row.pct}</td>
+                  <td className="py-2.5 px-4 text-slate-800">{row.div}</td>
+                  <td className="py-2.5 px-4 font-bold text-emerald-700">{row.grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Board & University Standards: 10th, 12th, and CGPA */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xl shadow-slate-100 space-y-3">
+          <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+            <GraduationCap className="w-5 h-5" />
+          </div>
+          <h3 className="font-bold text-base text-slate-900">10th Board Percentage</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Most national boards (CBSE &amp; ICSE) calculate aggregate based on 5 subjects. If an additional 6th skill subject is taken, the Best-of-5 rule replaces the lowest-scoring non-language subject.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xl shadow-slate-100 space-y-3">
+          <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+            <Layers className="w-5 h-5" />
+          </div>
+          <h3 className="font-bold text-base text-slate-900">12th Stream Cutoffs</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            For Science (PCM / PCB), Arts, and Commerce, entrance exams (JEE, NEET, CUET) require minimum stream aggregate percentages calculated out of 300 or 500 marks.
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xl shadow-slate-100 space-y-3">
+          <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+            <Sliders className="w-5 h-5" />
+          </div>
+          <h3 className="font-bold text-base text-slate-900">CGPA to % Conversion</h3>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Standard CBSE formula is <strong>Percentage (%) = CGPA &times; 9.5</strong>. For college 10-point GPA or 4.0 GPA scales, follow your university conversion index directly supported in our tool.
+          </p>
         </div>
       </div>
 
@@ -197,7 +348,7 @@ export function PercentageCalculatorSeoContent() {
             <span>Search FAQs &amp; Help</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-            Frequently Asked Questions About Percentage Calculation
+            Frequently Asked Questions About Percentage &amp; Marks Calculation
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
             Quick answers to common questions about calculating marks percentage, board rules, and grading conversions.
@@ -240,3 +391,4 @@ export function PercentageCalculatorSeoContent() {
     </section>
   );
 }
+

@@ -64,7 +64,7 @@ export default function App() {
   useEffect(() => {
     switch (activeTab) {
       case 'calculator':
-        document.title = 'Marks Percentage Calculator - SmartMarks | Calculate Marks to Percentage Online';
+        document.title = 'Percentage Calculator - Marks Calculator & Exam Marks to % Online';
         break;
       case 'guides':
         document.title = 'CBSE 10th, 12th & GPA Grading Formulas - SmartMarks Calculator';

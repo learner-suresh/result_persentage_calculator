@@ -22,7 +22,7 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
 
   const navItems = [
     { id: 'calculator', label: 'Marks & GPA', icon: Calculator },
-    { id: 'guides', label: 'Grading Guides & SEO', icon: BookOpen },
+    { id: 'guides', label: 'Grading Guides & Formulas', icon: BookOpen },
     { id: 'about', label: 'About', icon: Info },
     { id: 'privacy', label: 'Privacy Policy', icon: ShieldCheck },
     { id: 'contact', label: 'Contact', icon: Mail },
