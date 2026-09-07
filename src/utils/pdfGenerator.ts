@@ -6,7 +6,8 @@ import { getGradeDetails } from './calculator';
 export function generatePerformanceReportPDF(
   studentInfo: StudentInfo,
   subjects: SubjectItem[],
-  result: CalculationResult
+  result: CalculationResult,
+  passThresholdPercent: number = 33
 ) {
   const doc = new jsPDF({
     orientation: 'portrait',
@@ -144,7 +145,7 @@ export function generatePerformanceReportPDF(
     const max = Math.max(1, Number(sub.maxMarks) || 100);
     const pct = (obtained / max) * 100;
     const grade = getGradeDetails(pct);
-    const status = pct >= 33 ? 'PASSED' : 'FAIL';
+    const status = pct >= passThresholdPercent ? 'PASSED' : 'FAIL';
     const credits = sub.credits ? `${sub.credits}` : '-';
 
     return [

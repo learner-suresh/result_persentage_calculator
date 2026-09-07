@@ -51,13 +51,13 @@ export function Dashboard() {
 
   // Student metadata
   const [studentInfo, setStudentInfo] = useState<StudentInfo>({
-    studentName: 'Aarav Sharma',
-    rollNumber: 'CBSE-2025-10492',
-    standard: 'Class 10th',
-    streamOrMajor: 'General Secondary',
-    institutionName: 'Delhi Public School, R.K. Puram',
-    academicYear: '2025–2026',
-    examTitle: 'Secondary School Examination',
+    studentName: '',
+    rollNumber: '',
+    standard: '',
+    streamOrMajor: '',
+    institutionName: '',
+    academicYear: '',
+    examTitle: '',
   });
 
   // Subjects state
@@ -67,7 +67,7 @@ export function Dashboard() {
       id: `sub-${idx}-${Date.now()}`,
       name: s.name,
       maxMarks: s.maxMarks,
-      obtainedMarks: s.obtainedMarks,
+      obtainedMarks: s.obtainedMarks ?? '',
       credits: s.credits || 1,
       included: true,
     }));
@@ -96,7 +96,7 @@ export function Dashboard() {
         id: `sub-${idx}-${Date.now()}`,
         name: s.name,
         maxMarks: s.maxMarks,
-        obtainedMarks: s.obtainedMarks,
+        obtainedMarks: s.obtainedMarks ?? '',
         credits: s.credits || (preset.standard === 'college' ? 3 : 1),
         included: true,
       }))
@@ -178,10 +178,10 @@ export function Dashboard() {
       // Custom standard
       setActivePresetId('custom-class');
       setSubjects([
-        { id: `sub-1-${Date.now()}`, name: 'Subject 1', maxMarks: 100, obtainedMarks: 85, included: true },
-        { id: `sub-2-${Date.now()}`, name: 'Subject 2', maxMarks: 100, obtainedMarks: 78, included: true },
-        { id: `sub-3-${Date.now()}`, name: 'Subject 3', maxMarks: 100, obtainedMarks: 92, included: true },
-        { id: `sub-4-${Date.now()}`, name: 'Subject 4', maxMarks: 100, obtainedMarks: 88, included: true },
+        { id: `sub-1-${Date.now()}`, name: 'Subject 1', maxMarks: 100, obtainedMarks: '', included: true },
+        { id: `sub-2-${Date.now()}`, name: 'Subject 2', maxMarks: 100, obtainedMarks: '', included: true },
+        { id: `sub-3-${Date.now()}`, name: 'Subject 3', maxMarks: 100, obtainedMarks: '', included: true },
+        { id: `sub-4-${Date.now()}`, name: 'Subject 4', maxMarks: 100, obtainedMarks: '', included: true },
       ]);
       setStudentInfo((prev) => ({
         ...prev,
@@ -252,7 +252,7 @@ export function Dashboard() {
       id: `sub-${Date.now()}`,
       name: `Subject ${subjects.length + 1}`,
       maxMarks: 100,
-      obtainedMarks: 75,
+      obtainedMarks: '',
       credits: standard === 'college' ? 3 : 1,
       included: true,
     };
@@ -273,7 +273,7 @@ export function Dashboard() {
     setSubjects(
       subjects.map((s) => ({
         ...s,
-        obtainedMarks: 0,
+        obtainedMarks: '',
       }))
     );
   };
@@ -298,7 +298,7 @@ export function Dashboard() {
         colors: ['#3b82f6', '#10b981', '#f59e0b', '#6366f1'],
       });
     }
-    generatePerformanceReportPDF(studentInfo, subjects, result);
+    generatePerformanceReportPDF(studentInfo, subjects, result, passThreshold);
   };
 
   // Save report to history
@@ -548,9 +548,39 @@ export function Dashboard() {
                   <ChevronDown className="w-4 h-4 text-slate-400" />
                 )}
               </button>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
-                Included in PDF
-              </span>
+              <div className="flex items-center gap-2">
+                {Boolean(
+                  studentInfo.studentName ||
+                    studentInfo.rollNumber ||
+                    studentInfo.institutionName ||
+                    studentInfo.examTitle ||
+                    studentInfo.standard ||
+                    studentInfo.streamOrMajor ||
+                    studentInfo.institutionLogo
+                ) && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setStudentInfo({
+                        studentName: '',
+                        rollNumber: '',
+                        standard: '',
+                        streamOrMajor: '',
+                        institutionName: '',
+                        academicYear: '',
+                        examTitle: '',
+                        institutionLogo: undefined,
+                      })
+                    }
+                    className="text-[11px] font-semibold text-slate-500 hover:text-rose-600 px-2 py-0.5 rounded transition cursor-pointer"
+                  >
+                    Clear All
+                  </button>
+                )}
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+                  Included in PDF
+                </span>
+              </div>
             </div>
 
             {showStudentDetails && (
@@ -566,7 +596,7 @@ export function Dashboard() {
                       value={studentInfo.studentName}
                       onChange={(e) => setStudentInfo({ ...studentInfo, studentName: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="Candidate Name"
+                      placeholder="e.g. Aarav Sharma"
                     />
                   </div>
 
@@ -580,7 +610,7 @@ export function Dashboard() {
                       value={studentInfo.rollNumber}
                       onChange={(e) => setStudentInfo({ ...studentInfo, rollNumber: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="e.g. 104928"
+                      placeholder="e.g. CBSE-2025-10492"
                     />
                   </div>
 
@@ -594,7 +624,7 @@ export function Dashboard() {
                       value={studentInfo.institutionName}
                       onChange={(e) => setStudentInfo({ ...studentInfo, institutionName: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="Institution Name"
+                      placeholder="e.g. Delhi Public School"
                     />
                   </div>
 
@@ -608,7 +638,7 @@ export function Dashboard() {
                       value={studentInfo.examTitle}
                       onChange={(e) => setStudentInfo({ ...studentInfo, examTitle: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="e.g. Class 10 Board 2025"
+                      placeholder="e.g. Secondary School Examination 2025"
                     />
                   </div>
 
@@ -622,7 +652,7 @@ export function Dashboard() {
                       value={studentInfo.standard}
                       onChange={(e) => setStudentInfo({ ...studentInfo, standard: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="e.g. Class 10th or Class 8th"
+                      placeholder="e.g. Class 10th or Class 12th"
                     />
                   </div>
 
@@ -636,7 +666,7 @@ export function Dashboard() {
                       value={studentInfo.streamOrMajor}
                       onChange={(e) => setStudentInfo({ ...studentInfo, streamOrMajor: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 ring-indigo-500/20 focus:border-indigo-500 focus:outline-hidden text-slate-900 font-medium"
-                      placeholder="e.g. Science / Arts / General"
+                      placeholder="e.g. Science / Arts / Commerce"
                     />
                   </div>
                 </div>
@@ -820,7 +850,11 @@ export function Dashboard() {
                           min="0"
                           max="1000"
                           value={sub.obtainedMarks}
-                          onChange={(e) => updateSubject(sub.id, 'obtainedMarks', Number(e.target.value))}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            updateSubject(sub.id, 'obtainedMarks', val === '' ? '' : Number(val));
+                          }}
+                          placeholder="0"
                           className={`w-full px-2 py-1 text-xs text-center font-bold font-mono rounded-md border focus:outline-hidden ${
                             isOverMax
                               ? 'border-rose-400 text-rose-700 bg-rose-50'
@@ -850,8 +884,21 @@ export function Dashboard() {
                           <span className="block text-[10px] uppercase tracking-wider text-slate-400 font-bold">
                             Score
                           </span>
-                          <span className="inline-block text-xs font-bold text-indigo-600">
-                            {pct}%
+                          <span
+                            className={`inline-block text-xs font-bold ${
+                              sub.obtainedMarks === ''
+                                ? 'text-slate-400'
+                                : pct >= passThreshold
+                                ? 'text-indigo-600'
+                                : 'text-rose-600'
+                            }`}
+                            title={
+                              sub.obtainedMarks !== '' && pct < passThreshold
+                                ? `Below pass threshold (${passThreshold}%)`
+                                : undefined
+                            }
+                          >
+                            {sub.obtainedMarks === '' ? '—' : `${pct}%`}
                           </span>
                         </div>
                       )}
@@ -933,21 +980,75 @@ export function Dashboard() {
               </div>
 
               {/* Passing Threshold Setting */}
-              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between items-center font-semibold">
-                  <span className="text-slate-700">Subject Pass Threshold:</span>
-                  <span className="font-bold text-slate-800 font-mono">{passThreshold}%</span>
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-3">
+                <div className="flex justify-between items-center gap-2">
+                  <div>
+                    <label htmlFor="pass-threshold-input" className="block text-xs font-bold text-slate-800">
+                      Subject Pass Threshold (%)
+                    </label>
+                    <span className="text-[11px] text-slate-500">
+                      Minimum score required to pass each subject
+                    </span>
+                  </div>
+                  <div className="flex items-center bg-white px-2.5 py-1 rounded-lg border border-slate-300 shadow-xs focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-indigo-500">
+                    <input
+                      id="pass-threshold-input"
+                      type="number"
+                      min="1"
+                      max="100"
+                      step="1"
+                      value={passThreshold === 0 ? '' : passThreshold}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (val === '') {
+                          setPassThreshold(0);
+                        } else {
+                          const num = Number(val);
+                          if (!isNaN(num)) {
+                            setPassThreshold(Math.max(0, Math.min(100, Math.round(num))));
+                          }
+                        }
+                      }}
+                      onBlur={() => {
+                        if (passThreshold <= 0) setPassThreshold(33);
+                      }}
+                      placeholder="33"
+                      className="w-12 text-center text-sm font-bold font-mono text-slate-800 focus:outline-hidden"
+                      aria-label="Custom subject pass threshold percentage"
+                    />
+                    <span className="text-xs font-bold text-indigo-600">%</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 pt-1">
-                  {[33, 35, 40, 50].map((val) => (
+
+                {/* Range Slider */}
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    step="1"
+                    value={passThreshold || 33}
+                    onChange={(e) => setPassThreshold(Number(e.target.value))}
+                    className="w-full accent-indigo-600 cursor-pointer h-1.5 bg-slate-200 rounded-lg"
+                    aria-label="Pass threshold percentage slider"
+                  />
+                  <span className="text-xs font-mono font-bold text-indigo-700 min-w-[34px] text-right">
+                    {passThreshold}%
+                  </span>
+                </div>
+
+                {/* Quick Presets */}
+                <div className="flex items-center gap-1.5 pt-0.5">
+                  <span className="text-[11px] font-medium text-slate-500 mr-1">Presets:</span>
+                  {[33, 35, 40, 50, 60].map((val) => (
                     <button
                       key={val}
                       type="button"
                       onClick={() => setPassThreshold(val)}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition ${
+                      className={`flex-1 py-1 rounded-md text-xs font-bold transition ${
                         passThreshold === val
                           ? 'bg-indigo-600 text-white shadow-xs'
-                          : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+                          : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:border-slate-300'
                       }`}
                     >
                       {val}%
@@ -955,7 +1056,7 @@ export function Dashboard() {
                   ))}
                 </div>
                 <p className="text-[10px] text-slate-500">
-                  (CBSE/ICSE typically requires 33%; degree subjects often require 40%–50%).
+                  CBSE/ICSE boards use 33%, State boards usually use 35%, and colleges typically require 40%–50%.
                 </p>
               </div>
             </div>

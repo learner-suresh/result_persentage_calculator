@@ -25,9 +25,9 @@ export function FirstPlacePercentageCalculator({
   onPopulateDetailed,
   className = '',
 }: FirstPlacePercentageCalculatorProps) {
-  const [scoredInput, setScoredInput] = useState<string>('425');
+  const [scoredInput, setScoredInput] = useState<string>('');
   const [outOfInput, setOutOfInput] = useState<string>('500');
-  const [hasCalculated, setHasCalculated] = useState<boolean>(true);
+  const [hasCalculated, setHasCalculated] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [showScoredTooltip, setShowScoredTooltip] = useState<boolean>(false);
   const [showOutOfTooltip, setShowOutOfTooltip] = useState<boolean>(false);
@@ -42,9 +42,11 @@ export function FirstPlacePercentageCalculator({
 
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
-    setHasCalculated(true);
-    if (resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (scoredInput.trim() !== '') {
+      setHasCalculated(true);
+      if (resultRef.current) {
+        resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     }
   };
 
@@ -63,10 +65,9 @@ export function FirstPlacePercentageCalculator({
 
   const handlePreset = (val: number) => {
     setOutOfInput(val.toString());
-    if (scoredNum > val) {
-      setScoredInput(Math.round(val * 0.85).toString());
+    if (scoredInput && scoredNum > val) {
+      setScoredInput(val.toString());
     }
-    setHasCalculated(true);
   };
 
   return (
@@ -146,10 +147,15 @@ export function FirstPlacePercentageCalculator({
                   required
                   value={scoredInput}
                   onChange={(e) => {
-                    setScoredInput(e.target.value);
-                    setHasCalculated(true);
+                    const val = e.target.value;
+                    setScoredInput(val);
+                    if (val.trim() !== '') {
+                      setHasCalculated(true);
+                    } else {
+                      setHasCalculated(false);
+                    }
                   }}
-                  placeholder="Enter marks scored"
+                  placeholder="e.g. 425"
                   className="w-full px-4 py-2.5 text-base font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden"
                 />
                 <div className="flex items-center justify-center px-4 bg-slate-50 border-l border-sky-200 text-sm font-semibold text-slate-600 select-none">
@@ -406,6 +412,14 @@ export function FirstPlacePercentageCalculator({
               </button>
             </div>
           )}
+        </div>
+      )}
+
+      {!hasCalculated && (
+        <div className="mt-6 p-5 rounded-xl bg-slate-50/80 border border-dashed border-slate-200 text-center">
+          <p className="text-xs font-semibold text-slate-600">
+            Enter your marks scored above to view instant percentage, grade, division, and milestone gap analysis.
+          </p>
         </div>
       )}
     </section>

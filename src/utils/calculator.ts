@@ -48,6 +48,31 @@ export function calculateAcademicStanding(
     };
   }
 
+  const hasEnteredAnyMarks = activeSubjects.some(
+    (s) => s.obtainedMarks !== '' && s.obtainedMarks !== undefined
+  );
+
+  if (!hasEnteredAnyMarks) {
+    const totalMaxPossible = activeSubjects.reduce((acc, s) => acc + (Number(s.maxMarks) || 100), 0);
+    return {
+      totalObtained: 0,
+      totalMax: totalMaxPossible,
+      percentage: 0,
+      gpa: 0,
+      gpaScale,
+      letterGrade: '—',
+      division: 'Awaiting Marks',
+      divisionColor: 'text-slate-500 bg-slate-100 border-slate-200',
+      resultStatus: 'Passed',
+      passedCount: 0,
+      failedCount: 0,
+      highestSubject: null,
+      lowestSubject: null,
+      averageMarks: 0,
+      feedbackRemarks: 'Enter your subject scores in the input boxes to calculate your percentage, division, and GPA.',
+    };
+  }
+
   let totalObtained = 0;
   let totalMax = 0;
   let totalWeightedGP = 0;

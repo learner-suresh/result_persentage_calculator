@@ -6,7 +6,7 @@ export interface SubjectItem {
   id: string;
   name: string;
   maxMarks: number;
-  obtainedMarks: number;
+  obtainedMarks: number | '';
   credits?: number; // For college GPA
   gradePoint?: number; // 0 - 10 or 0 - 4
   letterGrade?: string;
@@ -53,7 +53,7 @@ export interface PresetTemplate {
   subjects: Array<{
     name: string;
     maxMarks: number;
-    obtainedMarks: number;
+    obtainedMarks?: number | '';
     credits?: number;
     included?: boolean;
   }>;
