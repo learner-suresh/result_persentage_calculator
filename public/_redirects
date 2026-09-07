@@ -1,3 +1,6 @@
+# Canonical redirects
+/index.html     /               301!
+
 # Direct static file access (prevents SPA rewrite of sitemap, robots, ads, verification)
 /sitemap.xml    /sitemap.xml    200
 /robots.txt     /robots.txt     200
