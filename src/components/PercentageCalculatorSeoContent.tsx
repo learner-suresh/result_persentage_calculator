@@ -12,6 +12,7 @@ import {
   GraduationCap,
   Sliders,
 } from 'lucide-react';
+import { AdSenseUnit } from './AdSenseUnit';
 
 interface FaqItem {
   question: string;
@@ -249,6 +250,11 @@ export function PercentageCalculatorSeoContent() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Google-Compliant Publisher Content In-Article Ad Placement */}
+      <div className="my-6">
+        <AdSenseUnit format="responsive-banner" />
       </div>
 
       {/* Board & University Standards: 10th, 12th, and CGPA */}

@@ -1427,11 +1427,6 @@ export function Dashboard() {
       </div>
       </section>
 
-      {/* AdSense Placement above Educational Guides */}
-      <div className="max-w-4xl mx-auto px-4">
-        <AdSenseUnit format="responsive-banner" className="my-6" />
-      </div>
-
       {/* Complete Percentage Calculator SEO & Educational Guide */}
       <PercentageCalculatorSeoContent />
 
