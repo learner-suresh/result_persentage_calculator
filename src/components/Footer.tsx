@@ -2,7 +2,7 @@ import React from 'react';
 import { GraduationCap, ShieldCheck, Heart, Sparkles } from 'lucide-react';
 
 interface FooterProps {
-  setActiveTab: (tab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact') => void;
+  setActiveTab: (tab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact' | 'terms') => void;
 }
 
 export function Footer({ setActiveTab }: FooterProps) {
@@ -132,6 +132,18 @@ export function Footer({ setActiveTab }: FooterProps) {
                 <button
                   type="button"
                   onClick={() => {
+                    setActiveTab('terms');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-indigo-600 transition"
+                >
+                  Terms of Service &amp; Disclaimer
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
                     setActiveTab('contact');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
@@ -140,11 +152,8 @@ export function Footer({ setActiveTab }: FooterProps) {
                   Contact &amp; Student Support
                 </button>
               </li>
-              <li>
-                <span className="flex items-center gap-1 text-[11px] text-slate-400 mt-2">
-                  <Sparkles className="w-3 h-3 text-amber-500" />
-                  Google AdSense Approved Structure
-                </span>
+              <li className="pt-1 text-[11px] text-slate-400">
+                Educational reference portal for examination scoring &amp; grade analytics.
               </li>
             </ul>
           </div>

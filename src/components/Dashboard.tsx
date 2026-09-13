@@ -378,18 +378,19 @@ export function Dashboard() {
           />
         </div>
 
-        {/* Right Side Ad Placement */}
+        {/* Right Side Academic Reference Card (High Value Publisher Content) */}
         <div className="lg:col-span-4 xl:col-span-4 order-2 space-y-4">
-          <AdSenseUnit slotId="9876543210" format="rectangle" className="my-0 shadow-xl" />
-
           {/* Academic Formula & Division Reference Card */}
           <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xl shadow-slate-100 text-left space-y-3">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
-              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-              <span>Calculation &amp; Division Standards</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+                <span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                <span>Calculation &amp; Division Standards</span>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700">Official Standards</span>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              <strong className="text-slate-700">Percentage Formula:</strong> (Scored Marks &divide; Out of Marks) &times; 100
+            <p className="text-xs text-slate-600 leading-relaxed">
+              <strong className="text-slate-800">Core Formula:</strong> (Scored Marks &divide; Out of Marks) &times; 100
             </p>
             <div className="grid grid-cols-3 gap-1.5 text-center text-[10px] font-bold">
               <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-100">
@@ -418,6 +419,32 @@ export function Dashboard() {
                 Subject Marksheet &darr;
               </button>
             </div>
+          </div>
+
+          {/* Board Rules & Quick Conversion Cheat Sheet */}
+          <div className="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-5 shadow-xl border border-slate-800 space-y-3">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>Board Conversion Quick Guide</span>
+            </div>
+            <ul className="space-y-2 text-xs text-slate-300">
+              <li className="flex items-start justify-between gap-2 border-b border-slate-800/80 pb-1.5">
+                <span className="font-semibold text-white">CBSE 10th &amp; 12th:</span>
+                <span className="font-mono text-amber-300 text-[11px]">Best 5 Subjects</span>
+              </li>
+              <li className="flex items-start justify-between gap-2 border-b border-slate-800/80 pb-1.5">
+                <span className="font-semibold text-white">CGPA to % Formula:</span>
+                <span className="font-mono text-amber-300 text-[11px]">CGPA &times; 9.5</span>
+              </li>
+              <li className="flex items-start justify-between gap-2 border-b border-slate-800/80 pb-1.5">
+                <span className="font-semibold text-white">Honors / Distinction:</span>
+                <span className="font-mono text-emerald-400 text-[11px]">&ge; 75.0%</span>
+              </li>
+              <li className="flex items-start justify-between gap-2">
+                <span className="font-semibold text-white">Min Passing Cutoff:</span>
+                <span className="font-mono text-amber-400 text-[11px]">33% / 35%</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -930,13 +957,10 @@ export function Dashboard() {
             <button
               type="button"
               onClick={addSubject}
-              className="mt-4 text-xs font-bold text-indigo-600 flex items-center gap-2 hover:translate-x-1 transition-transform"
+              className="mt-4 text-xs font-bold text-indigo-600 flex items-center gap-2 hover:translate-x-1 transition-transform cursor-pointer"
             >
               + ADD ANOTHER SUBJECT
             </button>
-
-            {/* In-feed AdSense Placement */}
-            <AdSenseUnit slotId="5566778899" format="responsive-banner" />
           </div>
 
           {/* Target Gap & Calculator Settings */}
@@ -1402,6 +1426,11 @@ export function Dashboard() {
         </div>
       </div>
       </section>
+
+      {/* AdSense Placement above Educational Guides */}
+      <div className="max-w-4xl mx-auto px-4">
+        <AdSenseUnit format="responsive-banner" className="my-6" />
+      </div>
 
       {/* Complete Percentage Calculator SEO & Educational Guide */}
       <PercentageCalculatorSeoContent />

@@ -12,8 +12,8 @@ import {
 } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact';
-  setActiveTab: (tab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact') => void;
+  activeTab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact' | 'terms';
+  setActiveTab: (tab: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact' | 'terms') => void;
   onExportPdf?: () => void;
 }
 

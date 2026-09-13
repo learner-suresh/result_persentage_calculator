@@ -12,7 +12,9 @@ import { AboutPage } from './pages/AboutPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { ContactPage } from './pages/ContactPage';
 
-type TabType = 'calculator' | 'guides' | 'about' | 'privacy' | 'contact';
+import { TermsOfServicePage } from './pages/TermsOfServicePage';
+
+type TabType = 'calculator' | 'guides' | 'about' | 'privacy' | 'contact' | 'terms';
 
 function getTabFromPath(path: string): TabType {
   const cleanPath = path.toLowerCase().replace(/\/+$/, '');
@@ -20,6 +22,7 @@ function getTabFromPath(path: string): TabType {
   if (cleanPath === '/about') return 'about';
   if (cleanPath === '/privacy') return 'privacy';
   if (cleanPath === '/contact') return 'contact';
+  if (cleanPath === '/terms' || cleanPath === '/disclaimer') return 'terms';
   return 'calculator';
 }
 
@@ -29,6 +32,7 @@ function getPathFromTab(tab: TabType): string {
     case 'about': return '/about';
     case 'privacy': return '/privacy';
     case 'contact': return '/contact';
+    case 'terms': return '/terms';
     default: return '/';
   }
 }
@@ -78,6 +82,9 @@ export default function App() {
       case 'contact':
         document.title = 'Contact Support & Feedback - SmartMarks Calculator';
         break;
+      case 'terms':
+        document.title = 'Terms of Service & Academic Disclaimer - SmartMarks Calculator';
+        break;
     }
   }, [activeTab]);
 
@@ -108,6 +115,9 @@ export default function App() {
         )}
         {activeTab === 'privacy' && <PrivacyPolicyPage />}
         {activeTab === 'contact' && <ContactPage />}
+        {activeTab === 'terms' && (
+          <TermsOfServicePage onBackToCalc={() => setActiveTab('calculator')} />
+        )}
       </main>
 
       {/* Site Footer */}
