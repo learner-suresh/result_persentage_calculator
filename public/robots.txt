@@ -5,4 +5,4 @@ User-agent: Googlebot
 Allow: /
 Allow: /sitemap.xml
 
-Sitemap: https://markssmartcalculator.netlify.app/sitemap.xml
+Sitemap: https://smartmarkscalculator.netlify.app/sitemap.xml
