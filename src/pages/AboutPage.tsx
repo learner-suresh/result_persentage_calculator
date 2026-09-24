@@ -102,13 +102,16 @@ export function AboutPage({ onBackToCalc }: { onBackToCalc: () => void }) {
           We believe high-quality academic tools should be accessible to all students. This platform is built adhering to WCAG 2.1 AA accessibility standards, featuring high-contrast color palettes, clear font hierarchy, full keyboard navigability, and screen-reader announcements for live calculation updates.
         </p>
         <div>
-          <button
-            type="button"
-            onClick={onBackToCalc}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onBackToCalc();
+            }}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 font-bold text-xs text-white transition shadow-md hover:shadow-indigo-600/30 active:scale-95"
           >
             Launch Marks &amp; GPA Calculator &rarr;
-          </button>
+          </a>
         </div>
       </div>
     </article>

@@ -272,14 +272,17 @@ export function GradingGuidesPage({ onLaunchCalculator }: { onLaunchCalculator: 
 
       {/* Call to Action to Launch Calculator */}
       <div className="text-center pt-4">
-        <button
-          type="button"
-          onClick={onLaunchCalculator}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            onLaunchCalculator();
+          }}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition shadow-md hover:shadow-indigo-600/30 active:scale-95"
         >
           <span>Calculate Your Marks &amp; Export PDF Report</span>
           <ArrowRight className="w-4 h-4" />
-        </button>
+        </a>
       </div>
     </article>
   );

@@ -21,11 +21,11 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'calculator', label: 'Marks & GPA', icon: Calculator },
-    { id: 'guides', label: 'Grading Guides & Formulas', icon: BookOpen },
-    { id: 'about', label: 'About', icon: Info },
-    { id: 'privacy', label: 'Privacy Policy', icon: ShieldCheck },
-    { id: 'contact', label: 'Contact', icon: Mail },
+    { id: 'calculator', href: '/', label: 'Marks & GPA', icon: Calculator },
+    { id: 'guides', href: '/grading-guides', label: 'Grading Guides & Formulas', icon: BookOpen },
+    { id: 'about', href: '/about', label: 'About', icon: Info },
+    { id: 'privacy', href: '/privacy', label: 'Privacy Policy', icon: ShieldCheck },
+    { id: 'contact', href: '/contact', label: 'Contact', icon: Mail },
   ] as const;
 
   const handleNav = (id: 'calculator' | 'guides' | 'about' | 'privacy' | 'contact') => {
@@ -38,9 +38,12 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white shadow-xs">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand Logo */}
-        <button
-          type="button"
-          onClick={() => handleNav('calculator')}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNav('calculator');
+          }}
           className="flex items-center gap-3 text-left focus:outline-hidden group"
           aria-label="Student Marks and GPA Calculator Home"
         >
@@ -55,7 +58,7 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
               10th • 12th • College • Reports
             </span>
           </div>
-        </button>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6" aria-label="Main Navigation">
@@ -63,10 +66,13 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
-              <button
+              <a
                 key={item.id}
-                type="button"
-                onClick={() => handleNav(item.id)}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav(item.id);
+                }}
                 className={`flex items-center gap-1.5 py-1 text-sm font-medium transition ${
                   isActive
                     ? 'font-semibold text-indigo-600 border-b-2 border-indigo-600 pb-1'
@@ -75,7 +81,7 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
                 <span>{item.label}</span>
-              </button>
+              </a>
             );
           })}
         </nav>
@@ -114,10 +120,13 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
             return (
-              <button
+              <a
                 key={item.id}
-                type="button"
-                onClick={() => handleNav(item.id)}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNav(item.id);
+                }}
                 className={`flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-left transition ${
                   isActive
                     ? 'bg-indigo-50 text-indigo-700'
@@ -126,7 +135,7 @@ export function Navbar({ activeTab, setActiveTab, onExportPdf }: NavbarProps) {
               >
                 <Icon className={`w-5 h-5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
                 <span>{item.label}</span>
-              </button>
+              </a>
             );
           })}
 

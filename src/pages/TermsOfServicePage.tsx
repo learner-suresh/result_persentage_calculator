@@ -86,13 +86,16 @@ export function TermsOfServicePage({ onBackToCalc }: { onBackToCalc: () => void 
       </section>
 
       <div className="pt-4 text-center">
-        <button
-          type="button"
-          onClick={onBackToCalc}
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            onBackToCalc();
+          }}
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-700 font-bold text-xs text-white transition shadow-md hover:shadow-indigo-600/30 active:scale-95 cursor-pointer"
         >
           Return to Percentage Calculator &rarr;
-        </button>
+        </a>
       </div>
     </article>
   );

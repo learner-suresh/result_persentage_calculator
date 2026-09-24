@@ -36,64 +36,69 @@ export function Footer({ setActiveTab }: FooterProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('calculator');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   10th Board Marks to Percentage
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('calculator');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   12th Science (PCM/PCB) Aggregate
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('calculator');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   12th Commerce &amp; Arts Calculator
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('calculator');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   University Semester GPA &amp; CGPA
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/grading-guides"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('guides');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition font-bold text-indigo-600"
+                  className="hover:text-indigo-600 transition font-bold text-indigo-600 inline-block"
                 >
                   CBSE 9.5 Formula &amp; Grading Rules &rarr;
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -105,52 +110,56 @@ export function Footer({ setActiveTab }: FooterProps) {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/about"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('about');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   About Our Mission
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/privacy"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('privacy');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   Privacy Policy &amp; GDPR
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/terms"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('terms');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   Terms of Service &amp; Disclaimer
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => {
+                <a
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
                     setActiveTab('contact');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="hover:text-indigo-600 transition"
+                  className="hover:text-indigo-600 transition inline-block"
                 >
                   Contact &amp; Student Support
-                </button>
+                </a>
               </li>
               <li className="pt-1 text-[11px] text-slate-400">
                 Educational reference portal for examination scoring &amp; grade analytics.
