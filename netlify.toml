@@ -22,6 +22,52 @@
     Content-Type = "text/plain; charset=utf-8"
     Access-Control-Allow-Origin = "*"
 
+# 301 Canonical Redirects
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides"
+  to = "/grading-guides"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/disclaimer"
+  to = "/terms"
+  status = 301
+  force = true
+
+# Direct static route serving
+[[redirects]]
+  from = "/grading-guides"
+  to = "/grading-guides/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms/index.html"
+  status = 200
+
+# Static files
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap.xml"
@@ -32,6 +78,7 @@
   to = "/robots.txt"
   status = 200
 
+# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"

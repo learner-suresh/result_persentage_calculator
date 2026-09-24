@@ -1,5 +1,7 @@
-# Canonical redirects
+# Canonical redirects (normalize alternate URLs so search engines never index duplicates)
 /index.html     /               301!
+/guides         /grading-guides 301!
+/disclaimer     /terms          301!
 
 # Direct static file access (prevents SPA rewrite of sitemap, robots, ads, verification)
 /sitemap.xml    /sitemap.xml    200
@@ -7,6 +9,13 @@
 /ads.txt        /ads.txt        200
 /favicon.svg    /favicon.svg    200
 /google1d2c06ceba6c4d88.html /google1d2c06ceba6c4d88.html 200
+
+# Explicit pre-rendered route mapping (serves dedicated static HTML with exact self-canonical tags)
+/grading-guides /grading-guides/index.html 200
+/about          /about/index.html          200
+/privacy        /privacy/index.html        200
+/contact        /contact/index.html        200
+/terms          /terms/index.html          200
 
 # Single Page Application fallback for deep links
 /*              /index.html     200
